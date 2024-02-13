@@ -17,7 +17,58 @@
     </style>
 </head>
 <body>
+
     <canvas id="gameCanvas" width="320" height="320"></canvas>
     <script src="snake.js"></script>
+
+<script>
+// function that calculates the new position of the snake
+function update() {
+    // update the position of the snake
+    snake.update();
+    // check if the snake has eaten the food
+    if (snake.eat(food)) {
+        // create a new food object
+        food = createFood();
+    }
+}
+
+// function that calclulates time difference and calls the update function
+function draw() {
+    // clear the canvas
+    gameBoard.clear();
+    // draw the snake
+    snake.draw();
+    // draw the food
+    food.draw();
+} 
+
+// function that calculates time difference 
+function gameLoop() {
+    // calculate the time difference
+    let now = Date.now();
+    let elapsed = now - previous;
+    // if the time difference is greater than the frame rate
+    if (elapsed > frameRate) {
+        // set the previous time to now
+        previous = now;
+        // call the update function
+        update();
+        // call the draw function
+        draw();
+    }
+    // call the gameLoop function
+    requestAnimationFrame(gameLoop);
+}
+
+
+
+// q: why is the canvas tag here?
+// a: the canvas tag is used to draw the game on the screen. It is a container for graphics, where we can draw graphics on the screen using JavaScript.
+// q: what doe the canvas tag do?
+// a: the canvas tag is used to draw graphics on the screen using JavaScript. It is a container for graphics, where we can draw graphics on the screen using JavaScript.
+</script>
+
+
 </body>
 </html>
